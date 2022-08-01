@@ -1,30 +1,38 @@
 const $ = (id) => document.querySelector(id);
 
+
+const form = $('#form');
 const title = $('h1');
-const parrafito = $('.parrafito');
-const pid = $('#pid');
-const input = $('input');
+const input1 = $('#calculo1');
+const input2 = $('#calculo2');
+const btn = $('#btnCalcular');
+const parrafo = $('#result');
+const cuadrado = $('#cuadrado');
+const red = $('#red');
+const blue = $('#blue');
+const gray = $('#gray');
 
-console.log(input.value);
 
-console.log({
-  title,
-  parrafito,
-  pid,
-  input,
-});
 
-title.innerText = 'Manipulando el DOM <br> con JS';
-// console.log(title.getAttribute('pantalla'));
-// title.setAttribute('pantalla', 'grande');
+// form.addEventListener('submit', sumarInputValue);
 
-title.classList.add('grande');
-title.classList.remove('grande');
-input.value = '2112';
+// function sumarInputValue(event) {
+//   console.log({event});
+//   event.preventDefault();
+//   console.log(parseInt(input1.value) + parseInt(input2.value));
+//   parrafo.innerText = parseInt(input1.value) + parseInt(input2.value);
+// }
 
-const image = document.createElement('img');
-image.setAttribute('src', 'https://picsum.photos/200/300');
-console.log(image);
 
-pid.innerHTML = '';
-pid.appendChild(image);
+red.addEventListener('mouseover', event => {
+  event.target.style.background = 'red';
+})
+
+form.addEventListener('click', sumarInputValue);
+
+function sumarInputValue(event) {
+  console.log(parseInt(input1.value) + parseInt(input2.value));
+  parrafo.innerText = parseInt(input1.value) + parseInt(input2.value);
+}
+
+
