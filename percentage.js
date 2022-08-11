@@ -1,7 +1,7 @@
 const $ = (id) => document.getElementById(id) 
 
 const inputPrice = $('get-price')
-const inputDiscount = $('get-discount')
+const inputCoupon = $('coupon')
 const calculate = $('calculate')
 const resultPrice = $('price-result')
 
@@ -29,18 +29,34 @@ coupons.push(fall, winter, summer, sprint, basic)
 
 console.log(coupons)
 
-
-// let discount = inputDiscount.value
-// console.log(discount)
-// if(discount === 'fall') {
-//   console.log('ok')
+// const couponsObj = {
+//   'fall': 30,
+//   'winter': 40,
+//   'summer': 20,
+//   'sprint': 10
 // }
 
-// coupons.forEach((item) => {
-//   if(item.coupon === discount){
-//     console.log(`El cupon tiene un descuento de: ${item.discount}`)
-//   }
-// })
+
+const couponsList = [];
+couponsList.push({
+  name: 'fall', 
+  discount:'30'
+})
+
+couponsList.push({
+  name: 'winter', 
+  discount:'40'
+})
+
+couponsList.push({
+  name: 'summer', 
+  discount:'20'
+})
+
+couponsList.push({
+  name: 'sprint', 
+  discount:'10'
+})
 
 
 
@@ -50,16 +66,46 @@ calculate.addEventListener('click', calculateDiscount)
 function calculateDiscount(event) {
   
   const price = Number(inputPrice.value)
-  const discount = inputDiscount.value  
-  console.log(typeof discount)
-  console.log({
-    price,
-    discount
-  })
-  if (!price || !discount){
+  const coupon = inputCoupon.value  
+
+
+  
+  
+  if (!price || !coupon){
     resultPrice.innerText = 'Please, enter the price and coupon'
     return
   }
+
+  let discount;
+
+  function couponsItem(couponItem) {
+    return couponItem.name == coupon;
+  }
+
+  const couponInArray = couponsList.find(couponsItem)
+  
+  if (couponInArray) {
+    discount = couponInArray.discount
+  } else {
+    resultPrice.innerHTML = 'Please, enter a valid coupon'
+    return
+  }
+
+  
+
+  // if(couponsObj[coupon]) {
+  //   discount = couponsObj[coupon];
+  // }else {
+  //   resultPrice.innerHTML = 'Please, enter a valid coupon'
+  //   return
+  // }
+
+  console.log({
+    price,
+    coupon,
+    discount,
+    couponInArray
+  })
   
   // if (discount === 'fall'){
   //   resultPrice.innerHTML = (price * (100 - fall)) / 100
@@ -71,15 +117,8 @@ function calculateDiscount(event) {
   //   resultPrice.innerHTML = 'Please, enter a valid coupon'
     
   // }
-  
-  coupons.forEach((item) => {
-    if(item.coupon === discount){
-      resultPrice.innerHTML = (price * (100 - item.discount)) / 100
-    } else {
-      resultPrice.innerHTML = 'Please, enter a valid coupon'
-    }
-  })
-  
 
+  resultPrice.innerHTML = (price * (100 - discount)) / 100
+  
   
 }
