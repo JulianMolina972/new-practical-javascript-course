@@ -19,10 +19,47 @@ if(arrLgth % 2 === 0){
 
 //mode 
 
-const emojis = ['🍕','🍔','🍔','🍔','🍔','🍔','🌭','🌭','🍟','🥞','🥪','🥙','🍣','🍕']
+const emojis = ['🍔','🌭','🌭','🍟','🥞','🥪','🥙','🍣','🍕','🍕','🌭']
 
-const mode = null
-console.log(mode);
+Math
+
+function calculateMode(numbersSorted) {
+  const listCount = {}
+
+  for (let i = 0; i < numbersSorted.length; i++) {
+    const element = numbersSorted[i];
+
+    if (listCount[element]){
+      listCount[element] += 1;
+    } else {
+      listCount[element] = 1
+    }
+    
+  }
+  
+  const listArray = Object.entries(listCount)
+  const result = listArray.sort((a, b) => a[1] - b[1])
+  const modeKeyValue = result.pop()
+  const mode = modeKeyValue[0]
+
+  return mode;
+
+}
+
+
+// const emojis = ['🍔','🌭','🌭','🍟','🥞','🥪','🥙','🍣','🍕','🍕','🌭']
+
+function mode(arr){
+    return arr.sort((a,b) =>
+        arr.filter(v => v === a).length
+        - arr.filter(v => v === b).length
+    ).pop();
+}
+
+console.log(mode(emojis)); 
+//mode = '🌭'
+
+console.log(calculateMode(emojis))
 
 
 
